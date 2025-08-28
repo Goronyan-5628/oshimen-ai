@@ -3,3 +3,4 @@ uvicorn
 scikit-learn
 numpy
 pandas
+Pillow==11.0.0
