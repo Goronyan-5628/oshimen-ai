@@ -1,0 +1,12 @@
+# .dockerignore（リポジトリ直下）
+.git
+.gitignore
+frontend
+images
+node_modules
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
