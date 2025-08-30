@@ -92,6 +92,10 @@ feature_dict = dict(zip(df_features["name"], df_features["features"]))
 class DiagnoseRequest(BaseModel):
     filename: str  # ※互換のためそのまま。実際は "name"（メンバー名）を入れてください。
 
+@app.get("/")
+def root():
+    return {"ok": True, "service": "oshimen-ai-api"}
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
