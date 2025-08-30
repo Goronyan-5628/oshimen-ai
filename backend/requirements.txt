@@ -8,3 +8,4 @@ opencv-python-headless==4.10.0.84
 deepface
 tensorflow==2.12.0
 keras==2.12.0
+python-multipart
