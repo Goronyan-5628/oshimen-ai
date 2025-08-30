@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# ---- 依存関係を先にコピー（ビルドキャッシュ有効化）----
-COPY backend/requirements.txt /app/requirements.txt
+# ---- 依存関係を先にコピー（← ここを相対に）----
+COPY requirements.txt /app/requirements.txt
 
-# ---- CPU安定化（ログ抑制は必要に応じてコメント解除）----
+# ---- CPU安定化（必要ならログ抑制も）----
 ENV OMP_NUM_THREADS=1 \
     TF_NUM_INTRAOP_THREADS=1 \
     TF_NUM_INTEROP_THREADS=1
@@ -20,11 +20,11 @@ ENV OMP_NUM_THREADS=1 \
 # ---- Python 依存インストール ----
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# ---- アプリ本体をコピー ----
-COPY backend/ /app/
+# ---- アプリ本体をコピー（← ここも相対に）----
+COPY . /app/
 
 # ---- Render は 8080 を想定 ----
 EXPOSE 8080
 
-# ---- Uvicorn で起動（ワーカー1で安定運用）----
+# ---- Uvicorn 起動 ----
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "1"]
